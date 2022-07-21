@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model WebCurrencyConverterV2.Models.ViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>How to create currency converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="~/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+  <div class="currency-row-outer">
+    <div class="currency-converter">
+      <h2>Currency Converter</h2>
+      <form method="post">
+      <div class="field grid-50-50">
+        <div class="colmun col-left">
+        @{
+            if (Model.Currency != null)
+            {
+                <input type="number" step="0.01" class="form-input" name="amount"  value="@Model.Currency.query.amount">
+            }
+            else
+            {
+                <input type="number" step="0.01" class="form-input" name="amount" placeholder="1">                  
+            }
+        }
+          
+        </div>
+        <div class="colmun col-right">
+          <div class="select">
+            <select name="from" class="currency" >
+                @{
+                    
+                    if (Model.Currency != null)
+                    {
+                        <option value="@Model.Currency.query.from">@Model.Currency.query.from</option>
+                        foreach (var item in Model.list)
+                         {
+                             <option value="@item">@item</option>
+                         }
+                    }
+                    else
+                    {
+                       foreach (var item in @Model.list)
+                       {
+                            <option value="@item">@item</option>
+                       }                 
+                    }
+                        
+                    
+                    
+                }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field grid-50-50">
+        <div class="colmun col-left">
+            @{
+                if (Model.Currency != null)
+                {
+                   <input type="number" class="form-input" id="output" placeholder="@Model.Currency.result"  disabled>
+                }
+                else{
+                    <input type="text" class="form-input" id="output" placeholder="1" disabled> 
+                }
+            }
+          
+        </div>
+        <div class="colmun col-right">
+          <div class="select">
+            <select name="to" class="currency" >
+                @{
+                    
+                    if (Model.Currency != null)
+                    {
+                        <option value="@Model.Currency.query.to">@Model.Currency.query.to</option>
+                        foreach (var item in Model.list)
+                         {
+                             <option value="@item">@item</option>
+                         }
+                    }
+                    else
+                    {
+                       foreach (var item in @Model.list)
+                       {
+                            <option value="@item">@item</option>
+                       }                 
+                    }
+                        
+                    
+                    
+                }
+            </select>
+          </div>
+        </div>
+      </div>
+      <div>
+          <input type="submit" value="send" />
+      </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

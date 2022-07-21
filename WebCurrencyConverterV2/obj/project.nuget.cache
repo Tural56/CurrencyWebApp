@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ofyNSCrNX7fJHeozh2ZQ46o0A/DysWONJbXOLygG3m3DkU/O3uPZv6kpLF+VY0axtIIdn4DDCsEckDbtYGgo8Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Tural\\source\\repos\\WebCurrencyConverterV2\\WebCurrencyConverterV2\\WebCurrencyConverterV2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tural\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

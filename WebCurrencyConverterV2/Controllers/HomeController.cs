@@ -1,0 +1,72 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using System.Diagnostics;
+using System.Globalization;
+using WebCurrencyConverterV2.Models;
+
+
+namespace WebCurrencyConverterV2.Controllers
+{
+   
+    public class HomeController : Controller
+    {
+        private IMemoryCache _memory;
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger, IMemoryCache memory)
+        {
+            _logger = logger;
+            _memory = memory;
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            ViewModel currencyList = new ViewModel();
+            if (TempData["from"] != null)
+            {
+                //Query query = (Query)_memory.Get("Query");
+                Query query = new Query();
+                query.from = (string)TempData["from"];
+                query.to = (string)TempData["to"];
+
+                NumberFormatInfo provider = new NumberFormatInfo();
+                provider.NumberDecimalSeparator = ".";
+                provider.NumberGroupSeparator = ",";
+                query.amount = Convert.ToDouble(TempData["amount"], provider);
+
+                currencyList.Currency = APIModel.GetResult(query.from, query.to, query.amount);
+                currencyList.list = APIModel.GetList();
+
+                return View(currencyList);
+            }
+            
+
+            currencyList.list = APIModel.GetList();
+
+            return View(currencyList);
+            
+        }
+        [HttpPost]
+        public IActionResult Index(string from, string to, string amount)
+        {
+
+            TempData["from"] = from;
+            TempData["to"] = to;
+            TempData["amount"] = amount;
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
