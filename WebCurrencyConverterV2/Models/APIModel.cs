@@ -6,7 +6,7 @@ namespace WebCurrencyConverterV2.Models
     public class APIModel
     {
 
-        //readonly string Key = "23CfaMSH9KeiCkN5DqumHPHaE4mNih";
+        
         public static Currency GetResult(string from, string to, double amount)
         {
             
@@ -22,7 +22,7 @@ namespace WebCurrencyConverterV2.Models
             }
             else
             {
-                result=null;
+                result= null;
                 
             }
 

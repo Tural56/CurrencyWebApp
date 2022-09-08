@@ -10,14 +10,7 @@ namespace WebCurrencyConverterV2.Controllers
    
     public class HomeController : Controller
     {
-        private IMemoryCache _memory;
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger, IMemoryCache memory)
-        {
-            _logger = logger;
-            _memory = memory;
-        }
+        
 
         [HttpGet]
         public IActionResult Index()
@@ -58,15 +51,6 @@ namespace WebCurrencyConverterV2.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        
     }
 }
